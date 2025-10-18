@@ -31,6 +31,7 @@ export default function App() {
     setDisplayText("");
   };
 
+  // Typing animation
   useEffect(() => {
     if (typingIndex < message.length) {
       const timeout = setTimeout(() => {
@@ -54,15 +55,15 @@ export default function App() {
 
   return (
     <div
-      className="relative w-screen h-screen overflow-hidden flex items-center justify-center"
+      className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden"
       style={{
-        background: `radial-gradient(circle at center, ${color}22, #000)`,
+        background: `radial-gradient(circle at center, ${color}11, #000)`,
         color: "#fff",
         fontFamily: "'Orbitron', sans-serif",
       }}
     >
       {/* Floating stars */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0">
         {[...Array(100)].map((_, i) => (
           <motion.div
             key={i}
@@ -77,7 +78,7 @@ export default function App() {
               opacity: [Math.random(), Math.random()],
             }}
             transition={{
-              duration: 5 + Math.random() * 10,
+              duration: 6 + Math.random() * 8,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -85,14 +86,14 @@ export default function App() {
         ))}
       </div>
 
-      {/* Centered content */}
+      {/* Content centered */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center p-8 rounded-2xl"
+        className="relative z-10 flex flex-col items-center text-center p-10 rounded-2xl"
         style={{
-          background: "rgba(0, 0, 0, 0.3)",
-          boxShadow: `0 0 25px ${color}`,
-          backdropFilter: "blur(8px)",
+          background: "rgba(0,0,0,0.35)",
           border: `1px solid ${color}55`,
+          boxShadow: `0 0 30px ${color}66`,
+          backdropFilter: "blur(8px)",
           maxWidth: "700px",
           width: "90%",
         }}
@@ -100,9 +101,8 @@ export default function App() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
       >
-        {/* Title */}
         <h1
-          className="text-4xl sm:text-5xl font-bold mb-6"
+          className="text-5xl sm:text-6xl font-bold mb-6"
           style={{
             textShadow: `0 0 25px ${color}`,
             color: "#fff",
@@ -111,29 +111,27 @@ export default function App() {
           🔮 Gensyn Horoscope
         </h1>
 
-        {/* Message */}
         <p
           className="text-xl sm:text-2xl leading-relaxed mb-8"
           style={{
-            textShadow: `0 0 10px ${color}55`,
             color: "#e0e0e0",
+            textShadow: `0 0 12px ${color}55`,
             minHeight: "80px",
           }}
         >
           {displayText}
         </p>
 
-        {/* Buttons */}
-        <div className="flex gap-3 justify-center mb-8 flex-wrap">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={getRandomHoroscope}
-            className="px-6 py-3 text-lg rounded-xl font-bold shadow-lg flex items-center gap-2"
+            className="px-6 py-3 text-lg font-bold rounded-xl flex items-center gap-2"
             style={{
               background: color,
               color: "#000",
-              boxShadow: `0 0 25px ${color}`,
+              boxShadow: `0 0 20px ${color}`,
             }}
           >
             <Sparkles size={20} /> Reveal Horoscope
@@ -143,16 +141,12 @@ export default function App() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleShare}
-            className="px-5 py-3 border border-white/50 text-sm rounded-lg flex items-center gap-2"
-            style={{
-              color: "#fff",
-            }}
+            className="px-5 py-3 border border-white/60 text-sm rounded-lg flex items-center gap-2 text-white"
           >
             <Twitter size={16} /> Share to X
           </motion.button>
         </div>
 
-        {/* Footer */}
         <footer className="text-sm opacity-70">
           Created by <span style={{ color: color }}>@Ozigoyeng</span>
         </footer>
