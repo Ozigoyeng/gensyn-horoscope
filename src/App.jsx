@@ -54,7 +54,7 @@ export default function App() {
 
   return (
     <div
-      className="flex items-center justify-center w-full h-full"
+      className="w-screen h-screen flex items-center justify-center relative"
       style={{
         background: `radial-gradient(circle at center, ${color}22, #000)`,
         color: "#fff",
@@ -84,16 +84,16 @@ export default function App() {
         ))}
       </div>
 
-      {/* Main card */}
+      {/* Main content centered */}
       <motion.div
         className="relative z-10 flex flex-col items-center justify-center text-center p-10 rounded-2xl shadow-2xl"
         style={{
           background: "rgba(0, 0, 0, 0.45)",
           border: `1px solid ${color}55`,
-          boxShadow: `0 0 50px ${color}99`,
-          backdropFilter: "blur(10px)",
-          maxWidth: "700px",
+          boxShadow: `0 0 60px ${color}99`,
+          backdropFilter: "blur(12px)",
           width: "90%",
+          maxWidth: "700px",
         }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
