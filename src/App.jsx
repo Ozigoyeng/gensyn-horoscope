@@ -4,7 +4,7 @@ import { Twitter, Sparkles } from "lucide-react";
 
 export default function App() {
   const [message, setMessage] = useState("");
-  const [color, setColor] = useState("#00ffff");
+  const [color, setColor] = useState("#ffb400");
   const [typingIndex, setTypingIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
 
@@ -21,7 +21,7 @@ export default function App() {
     "🚀 Exploding gradients? More like ascending greatness!",
   ];
 
-  const neonColors = ["#00ffff", "#ff00ff", "#ff9900", "#00ff99", "#ff0066", "#ff3300"];
+  const neonColors = ["#ffb400", "#00ffff", "#ff00ff", "#ff0066", "#00ff99", "#ff3300"];
 
   const getRandomHoroscope = () => {
     const index = Math.floor(Math.random() * horoscopes.length);
@@ -55,63 +55,57 @@ export default function App() {
   return (
     <div
       style={{
-        position: "relative",
         width: "100%",
         height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        position: "relative",
+        overflow: "hidden",
+        background: `radial-gradient(circle at center, ${color}11, #000)`,
         color: "#fff",
-        background: `radial-gradient(circle at center, ${color}22, #000)`,
       }}
     >
-      {/* Floating stars */}
-      <div style={{ position: "absolute", inset: 0, overflow: "hidden", zIndex: 0 }}>
-        {[...Array(60)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-white rounded-full"
-            style={{
-              width: 2,
-              height: 2,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: Math.random(),
-            }}
-            animate={{
-              opacity: [Math.random(), Math.random()],
-              y: ["0%", `${Math.random() * 5}%`],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 5,
-              repeat: Infinity,
-              repeatType: "mirror",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Main centered card */}
+      {/* Animated galaxy background */}
       <motion.div
-        className="z-10 text-center p-10 rounded-2xl shadow-2xl"
         style={{
-          background: "rgba(0, 0, 0, 0.5)",
-          border: `1px solid ${color}66`,
-          boxShadow: `0 0 50px ${color}99`,
-          backdropFilter: "blur(10px)",
+          position: "absolute",
+          width: "200%",
+          height: "200%",
+          background: `radial-gradient(circle at 30% 30%, ${color}11, transparent 70%), 
+                       radial-gradient(circle at 70% 70%, ${color}22, transparent 80%)`,
+          filter: `blur(120px)`,
+          zIndex: 0,
+        }}
+        animate={{
+          rotate: [0, 360],
+        }}
+        transition={{
+          duration: 60,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+
+      {/* Centered floating card */}
+      <motion.div
+        className="relative z-10 text-center p-10 rounded-2xl"
+        style={{
+          background: "rgba(0, 0, 0, 0.6)",
+          border: `1px solid ${color}55`,
+          boxShadow: `0 0 50px ${color}88`,
+          backdropFilter: "blur(12px)",
           width: "90%",
           maxWidth: "700px",
+          animation: "float 6s ease-in-out infinite",
         }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
       >
         <h1
           style={{
             fontSize: "3rem",
             fontWeight: "bold",
-            marginBottom: "1.5rem",
-            textShadow: `0 0 20px ${color}`,
+            marginBottom: "1rem",
+            textShadow: `0 0 25px ${color}`,
           }}
         >
           🔮 Gensyn Horoscope
@@ -122,14 +116,22 @@ export default function App() {
             fontSize: "1.25rem",
             color: "#ccc",
             marginBottom: "2rem",
-            minHeight: "60px",
             textShadow: `0 0 10px ${color}55`,
+            minHeight: "60px",
           }}
         >
           {displayText}
         </p>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginBottom: "2rem" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "1rem",
+            marginBottom: "2rem",
+            flexWrap: "wrap",
+          }}
+        >
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -140,7 +142,7 @@ export default function App() {
               fontWeight: "bold",
               border: "none",
               borderRadius: "8px",
-              padding: "0.75rem 1.5rem",
+              padding: "0.8rem 1.6rem",
               boxShadow: `0 0 20px ${color}`,
               cursor: "pointer",
             }}
@@ -153,11 +155,11 @@ export default function App() {
             whileTap={{ scale: 0.95 }}
             onClick={handleShare}
             style={{
-              border: "1px solid #fff",
+              border: `1px solid ${color}`,
               background: "transparent",
-              color: "#fff",
+              color: color,
               borderRadius: "8px",
-              padding: "0.75rem 1.5rem",
+              padding: "0.8rem 1.6rem",
               cursor: "pointer",
             }}
           >
