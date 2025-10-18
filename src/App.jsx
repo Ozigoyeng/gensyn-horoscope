@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden"
+      className="relative w-screen h-screen overflow-hidden"
       style={{
         background: `radial-gradient(circle at center, ${color}11, #000)`,
         color: "#fff",
@@ -86,16 +86,20 @@ export default function App() {
         ))}
       </div>
 
-      {/* Content centered */}
+      {/* CENTERED CONTENT */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center p-10 rounded-2xl"
+        className="absolute z-10 flex flex-col items-center justify-center text-center rounded-2xl"
         style={{
-          background: "rgba(0,0,0,0.35)",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          background: "rgba(0,0,0,0.4)",
           border: `1px solid ${color}55`,
-          boxShadow: `0 0 30px ${color}66`,
+          boxShadow: `0 0 30px ${color}77`,
           backdropFilter: "blur(8px)",
-          maxWidth: "700px",
           width: "90%",
+          maxWidth: "700px",
+          padding: "3rem 2rem",
         }}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -105,7 +109,6 @@ export default function App() {
           className="text-5xl sm:text-6xl font-bold mb-6"
           style={{
             textShadow: `0 0 25px ${color}`,
-            color: "#fff",
           }}
         >
           🔮 Gensyn Horoscope
@@ -115,7 +118,7 @@ export default function App() {
           className="text-xl sm:text-2xl leading-relaxed mb-8"
           style={{
             color: "#e0e0e0",
-            textShadow: `0 0 12px ${color}55`,
+            textShadow: `0 0 10px ${color}66`,
             minHeight: "80px",
           }}
         >
