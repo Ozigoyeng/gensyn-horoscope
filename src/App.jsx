@@ -54,96 +54,119 @@ export default function App() {
 
   return (
     <div
-      className="w-screen h-screen flex items-center justify-center relative"
       style={{
-        background: `radial-gradient(circle at center, ${color}22, #000)`,
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         color: "#fff",
+        background: `radial-gradient(circle at center, ${color}22, #000)`,
       }}
     >
-      {/* Background stars */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {[...Array(70)].map((_, i) => (
+      {/* Floating stars */}
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden", zIndex: 0 }}>
+        {[...Array(60)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+            className="absolute bg-white rounded-full"
+            style={{
+              width: 2,
+              height: 2,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
               opacity: Math.random(),
             }}
             animate={{
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
               opacity: [Math.random(), Math.random()],
+              y: ["0%", `${Math.random() * 5}%`],
             }}
             transition={{
-              duration: 8 + Math.random() * 6,
+              duration: 5 + Math.random() * 5,
               repeat: Infinity,
-              ease: "easeInOut",
+              repeatType: "mirror",
             }}
           />
         ))}
       </div>
 
-      {/* Main content centered */}
+      {/* Main centered card */}
       <motion.div
-        className="relative z-10 flex flex-col items-center justify-center text-center p-10 rounded-2xl shadow-2xl"
+        className="z-10 text-center p-10 rounded-2xl shadow-2xl"
         style={{
-          background: "rgba(0, 0, 0, 0.45)",
-          border: `1px solid ${color}55`,
-          boxShadow: `0 0 60px ${color}99`,
-          backdropFilter: "blur(12px)",
+          background: "rgba(0, 0, 0, 0.5)",
+          border: `1px solid ${color}66`,
+          boxShadow: `0 0 50px ${color}99`,
+          backdropFilter: "blur(10px)",
           width: "90%",
           maxWidth: "700px",
         }}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <h1
-          className="text-5xl sm:text-6xl font-bold mb-6"
-          style={{ textShadow: `0 0 25px ${color}` }}
+          style={{
+            fontSize: "3rem",
+            fontWeight: "bold",
+            marginBottom: "1.5rem",
+            textShadow: `0 0 20px ${color}`,
+          }}
         >
           🔮 Gensyn Horoscope
         </h1>
 
         <p
-          className="text-xl sm:text-2xl mb-8 leading-relaxed"
           style={{
-            minHeight: "80px",
-            color: "#ddd",
+            fontSize: "1.25rem",
+            color: "#ccc",
+            marginBottom: "2rem",
+            minHeight: "60px",
             textShadow: `0 0 10px ${color}55`,
           }}
         >
           {displayText}
         </p>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginBottom: "2rem" }}>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={getRandomHoroscope}
-            className="px-6 py-3 font-bold rounded-lg flex items-center gap-2"
             style={{
               background: color,
               color: "#000",
+              fontWeight: "bold",
+              border: "none",
+              borderRadius: "8px",
+              padding: "0.75rem 1.5rem",
               boxShadow: `0 0 20px ${color}`,
+              cursor: "pointer",
             }}
           >
-            <Sparkles size={20} /> Reveal Horoscope
+            <Sparkles size={18} /> Reveal Horoscope
           </motion.button>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleShare}
-            className="px-5 py-3 border border-white/70 text-sm rounded-lg flex items-center gap-2 text-white"
+            style={{
+              border: "1px solid #fff",
+              background: "transparent",
+              color: "#fff",
+              borderRadius: "8px",
+              padding: "0.75rem 1.5rem",
+              cursor: "pointer",
+            }}
           >
             <Twitter size={16} /> Share to X
           </motion.button>
         </div>
 
-        <footer className="text-sm opacity-70">
-          Created by <span style={{ color: color }}>@Ozigoyeng</span>
+        <footer style={{ fontSize: "0.85rem", opacity: 0.7 }}>
+          Created by <span style={{ color }}>{`@Ozigoyeng`}</span>
         </footer>
       </motion.div>
     </div>

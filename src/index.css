@@ -1,22 +1,16 @@
-/* src/index.css — Fullscreen Fix & Centering */
+/* src/index.css — full height + flex centering root fix */
 
-html,
-body,
-#root {
+html, body, #root {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #000; /* fallback background */
-  overflow: hidden; /* prevent scrollbars */
-}
-
-body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: radial-gradient(circle at center, #0a0a0a, #000);
+  overflow: hidden;
   font-family: 'Orbitron', sans-serif;
-  background: radial-gradient(circle at center, #222, #000);
 }
 
 * {
