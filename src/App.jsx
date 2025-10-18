@@ -54,16 +54,16 @@ export default function App() {
 
   return (
     <div
-      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center"
+      className="w-screen h-screen flex items-center justify-center overflow-hidden"
       style={{
         background: `radial-gradient(circle at center, ${color}22, #000)`,
         color: "#fff",
         fontFamily: "'Orbitron', sans-serif",
       }}
     >
-      {/* Floating stars */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(100)].map((_, i) => (
+      {/* Stars */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {[...Array(80)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
@@ -85,11 +85,11 @@ export default function App() {
         ))}
       </div>
 
-      {/* Centered content */}
+      {/* Main content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center rounded-2xl"
+        className="relative z-10 flex flex-col items-center text-center rounded-2xl shadow-2xl"
         style={{
-          background: "rgba(0, 0, 0, 0.4)",
+          background: "rgba(0, 0, 0, 0.45)",
           border: `1px solid ${color}55`,
           boxShadow: `0 0 40px ${color}88`,
           backdropFilter: "blur(8px)",
