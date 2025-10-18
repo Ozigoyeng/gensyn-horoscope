@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./index.css";
-import logo from "/L-4D2qr9_400x400.jpg";
+
+const logo = process.env.PUBLIC_URL + "/L-4D2qr9_400x400.jpg";
 
 const TABS = ["Horoscope", "Fortune", "Pick-up Lines", "AI Console"];
 
@@ -50,8 +51,6 @@ export default function App() {
 
   const [typed, setTyped] = useState("");
   const [power, setPower] = useState(null);
-  const [fullMsg, setFullMsg] = useState("");
-
   const [fortune, setFortune] = useState("");
   const [line, setLine] = useState("");
   const [consoleLines, setConsoleLines] = useState([]);
@@ -61,7 +60,6 @@ export default function App() {
 
   const revealHoroscope = () => {
     const msg = rand(HOROSCOPES);
-    setFullMsg(msg);
     setTyped("");
     setPower((90 + Math.random() * 10).toFixed(2));
 
@@ -107,13 +105,14 @@ export default function App() {
     setConsoleRun(false);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     revealHoroscope();
   }, []);
 
   return (
     <div className="app">
-      <audio ref={audioRef} src="/gensyn-theme.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/ULTRAWAVE - Oceandrive (Synthwave No Copyright Music).mp3" loop preload="auto" />
       <div className="card">
         <img src={logo} alt="Gensyn logo" className={`logo ${dance ? "dance" : ""}`} />
         <h1>🔮 Gensyn Horoscope</h1>
@@ -190,11 +189,11 @@ export default function App() {
             Created by{" "}
             <a
               className="credit"
-              href="https://x.com/Ojigoyeng"
+              href="https://x.com/Ozigoyeng"
               target="_blank"
               rel="noreferrer"
             >
-              @Ojigoyeng
+              @Ozigoyeng
             </a>
           </p>
         </footer>
