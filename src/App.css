@@ -41,3 +41,15 @@ body {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
 }
+
+@keyframes pulse-bg {
+  0% {
+    background-color: #0a0010;
+  }
+  50% {
+    background-color: #1a0020;
+  }
+  100% {
+    background-color: #0a0010;
+  }
+}
