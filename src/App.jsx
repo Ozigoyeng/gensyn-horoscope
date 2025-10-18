@@ -31,7 +31,7 @@ export default function App() {
     setDisplayText("");
   };
 
-  // typing animation
+  // Typing animation
   useEffect(() => {
     if (typingIndex < message.length) {
       const timeout = setTimeout(() => {
@@ -55,15 +55,15 @@ export default function App() {
 
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
+      className="relative w-screen h-screen overflow-hidden flex items-center justify-center"
       style={{
         background: `radial-gradient(circle at center, ${color}22, #000)`,
         color: "#fff",
         fontFamily: "'Orbitron', sans-serif",
       }}
     >
-      {/* Background stars */}
-      <div className="absolute inset-0 overflow-hidden z-0">
+      {/* Floating stars */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {[...Array(100)].map((_, i) => (
           <motion.div
             key={i}
@@ -86,56 +86,67 @@ export default function App() {
         ))}
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 p-8">
-        <motion.h1
-          className="text-4xl sm:text-6xl font-bold mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+      {/* Main card centered */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center text-center p-8 rounded-2xl"
+        style={{
+          background: "rgba(0,0,0,0.3)",
+          boxShadow: `0 0 25px ${color}`,
+          backdropFilter: "blur(6px)",
+          border: `1px solid ${color}55`,
+        }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <h1
+          className="text-4xl sm:text-6xl font-bold mb-6"
           style={{ textShadow: `0 0 20px ${color}` }}
         >
           🔮 Gensyn Horoscope
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          className="text-xl sm:text-2xl max-w-2xl leading-relaxed mx-auto"
+        <p
+          className="text-xl sm:text-2xl max-w-lg leading-relaxed mb-6"
           style={{
-            textShadow: `0 0 8px ${color}55`,
+            textShadow: `0 0 10px ${color}55`,
             color: "#e0e0e0",
+            minHeight: "80px",
           }}
         >
           {displayText}
-        </motion.p>
+        </p>
 
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={getRandomHoroscope}
-          className="mt-8 px-6 py-3 text-lg bg-transparent border-2 rounded-xl shadow-[0_0_20px] flex items-center gap-2 mx-auto"
-          style={{
-            borderColor: color,
-            color: color,
-            boxShadow: `0 0 20px ${color}`,
-            transition: "all 0.3s ease",
-          }}
-        >
-          <Sparkles size={20} /> Reveal My Node Horoscope
-        </motion.button>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={getRandomHoroscope}
+            className="px-6 py-3 text-lg rounded-xl shadow-lg flex items-center gap-2"
+            style={{
+              background: color,
+              color: "#000",
+              fontWeight: "bold",
+              boxShadow: `0 0 20px ${color}`,
+            }}
+          >
+            <Sparkles size={20} /> Reveal Horoscope
+          </motion.button>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleShare}
-          className="mt-4 px-4 py-2 border border-white/40 text-sm rounded-lg flex items-center gap-2 mx-auto"
-        >
-          <Twitter size={16} /> Share to X
-        </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleShare}
+            className="px-4 py-2 border border-white/50 text-sm rounded-lg flex items-center gap-2"
+          >
+            <Twitter size={16} /> Share to X
+          </motion.button>
+        </div>
 
-        <footer className="mt-10 text-sm opacity-70">
+        <footer className="mt-8 text-sm opacity-70">
           Created by <span style={{ color: color }}>@Ozigoyeng</span>
         </footer>
-      </div>
+      </motion.div>
     </div>
   );
 }
