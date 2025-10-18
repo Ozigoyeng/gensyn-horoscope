@@ -1,208 +1,141 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Twitter, Sparkles } from "lucide-react";
+import React, { useState } from "react";
 
-export default function App() {
-  const [message, setMessage] = useState("");
-  const [question, setQuestion] = useState("");
+function App() {
+  const [horoscope, setHoroscope] = useState("");
   const [color, setColor] = useState("#ff00ff");
-  const [typingIndex, setTypingIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
 
   const horoscopes = [
-    "💻 Your compute power is unmatched today. Deploy with confidence!",
-    "⚡ Inspiration surges through your neural nets — trust your gradient flow.",
-    "🌌 Latency may slow you down, but patience leads to stability.",
-    "🧠 Avoid emotional overfitting — regularize your feelings.",
-    "💾 Cache your dreams; you'll need them for inference later.",
-    "🤖 A mysterious GPU enters your destiny — embrace it.",
-    "🪐 Alignment achieved — your loss function is minimal today.",
+    "⚡ Your compute power is unmatched today. Deploy with confidence!",
     "🧩 Synchronize with peers before branching — merge with harmony.",
+    "🚀 Exploding gradients? More like ascending greatness!",
+    "💾 Cache your dreams; you'll need them for inference later.",
     "🔮 You will meet another node with identical embeddings. Soulmate?",
-    "🚀 Exploding gradients? More like ascending greatness!"
+    "🔥 Alignment achieved — your loss function is minimal today.",
   ];
 
-  const questions = [
-    "What are you optimizing for this week?",
-    "What process in your life needs regularization?",
-    "Who can you synchronize with to improve your network?",
-    "What gradients are you following right now?",
-    "What dream have you cached but not yet executed?",
-    "If your thoughts were a dataset, what needs cleaning?",
-    "How can you improve convergence in your personal growth?",
-    "What version of yourself deserves a new deployment?",
-    "Which part of your life is currently overfitting?",
-    "If life were a model, what parameter would you tune next?"
-  ];
+  const colors = ["#ff00ff", "#00ffff", "#00ff99", "#ffcc00", "#ff6600", "#cc00ff"];
 
-  const neonColors = ["#ff00ff", "#00ffff", "#ffb400", "#ff0066", "#00ff99", "#ff3300"];
-
-  const getRandomHoroscope = () => {
-    const index = Math.floor(Math.random() * horoscopes.length);
-    const qIndex = Math.floor(Math.random() * questions.length);
-    setMessage(horoscopes[index]);
-    setQuestion(questions[qIndex]);
-    setColor(neonColors[index % neonColors.length]);
-    setTypingIndex(0);
-    setDisplayText("");
-  };
-
-  useEffect(() => {
-    if (typingIndex < message.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + message[typingIndex]);
-        setTypingIndex(typingIndex + 1);
-      }, 25);
-      return () => clearTimeout(timeout);
-    }
-  }, [typingIndex, message]);
-
-  useEffect(() => {
-    getRandomHoroscope();
-  }, []);
-
-  const handleShare = () => {
-    const tweet = encodeURIComponent(
-      `🔮 Gensyn Horoscope:\n${message}\n💭 ${question}\n\nhttps://gensyn-horoscope.vercel.app`
-    );
-    window.open(`https://twitter.com/intent/tweet?text=${tweet}`, "_blank");
+  const generateHoroscope = () => {
+    const randomIndex = Math.floor(Math.random() * horoscopes.length);
+    const randomColor = colors[randomIndex];
+    setHoroscope(horoscopes[randomIndex]);
+    setColor(randomColor);
   };
 
   return (
     <div
       style={{
-        width: "100vw",
+        background: `radial-gradient(circle at center, ${color}22, #000000 90%)`,
+        color: "white",
         height: "100vh",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
-        overflow: "hidden",
-        background: `radial-gradient(circle at center, ${color}11, #000)`,
-        color: "#fff",
-        position: "relative",
+        justifyContent: "center",
+        fontFamily: "'Orbitron', sans-serif",
+        transition: "all 0.8s ease",
       }}
     >
-      {/* 🔮 Animated glowing background */}
-      <motion.div
+      <div
         style={{
-          position: "absolute",
-          width: "200%",
-          height: "200%",
-          background: `radial-gradient(circle at 30% 30%, ${color}11, transparent 70%), 
-                       radial-gradient(circle at 70% 70%, ${color}22, transparent 80%)`,
-          filter: `blur(120px)`,
-          zIndex: 0,
-        }}
-        animate={{
-          rotate: [0, 360],
-        }}
-        transition={{
-          duration: 60,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
-      {/* 🌟 Main Neon Card */}
-      <motion.div
-        className="relative z-10 text-center p-10 rounded-2xl"
-        style={{
-          background: "rgba(0, 0, 0, 0.6)",
+          background: "rgba(0,0,0,0.7)",
+          padding: "3rem 4rem",
+          borderRadius: "20px",
+          textAlign: "center",
+          boxShadow: `0 0 50px ${color}`,
           border: `1px solid ${color}55`,
-          boxShadow: `0 0 50px ${color}88`,
-          backdropFilter: "blur(12px)",
-          width: "90%",
           maxWidth: "700px",
-          animation: "float 6s ease-in-out infinite",
+          width: "90%",
         }}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
       >
+        <img
+          src="/L-4D2qr9_400x400.jpg"
+          alt="Gensyn logo"
+          style={{
+            width: "80px",
+            height: "80px",
+            imageRendering: "pixelated",
+            marginBottom: "1rem",
+            borderRadius: "8px",
+            filter: `drop-shadow(0 0 10px ${color})`,
+          }}
+        />
+
         <h1
           style={{
             fontSize: "3rem",
-            fontWeight: "bold",
             marginBottom: "1rem",
             textShadow: `0 0 25px ${color}`,
           }}
         >
-          🔮 Gensyn Horoscope
+          Gensyn Horoscope
         </h1>
 
         <p
           style={{
-            fontSize: "1.25rem",
-            color: "#ccc",
-            marginBottom: "1.5rem",
-            textShadow: `0 0 10px ${color}55`,
-            minHeight: "60px",
+            fontSize: "1.2rem",
+            marginBottom: "2rem",
+            color: "#ddd",
           }}
         >
-          {displayText}
+          {horoscope || "✨ What version of yourself deserves a new deployment?"}
         </p>
 
-        {/* 💭 Daily Reflective Question */}
-        <p
-          style={{
-            fontSize: "1rem",
-            fontStyle: "italic",
-            color: color,
-            marginBottom: "2rem",
-            textShadow: `0 0 8px ${color}`,
-          }}
-        >
-          💭 {question}
-        </p>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "1rem",
-            marginBottom: "2rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={getRandomHoroscope}
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+          <button
+            onClick={generateHoroscope}
             style={{
               background: color,
-              color: "#000",
-              fontWeight: "bold",
               border: "none",
-              borderRadius: "8px",
-              padding: "0.8rem 1.6rem",
-              boxShadow: `0 0 20px ${color}`,
+              padding: "0.8rem 1.5rem",
+              borderRadius: "10px",
+              fontWeight: "bold",
+              color: "#000",
               cursor: "pointer",
+              boxShadow: `0 0 15px ${color}`,
+              transition: "transform 0.2s ease",
             }}
+            onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+            onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
           >
-            <Sparkles size={18} /> Reveal Horoscope
-          </motion.button>
+            ⚙ Reveal Horoscope
+          </button>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleShare}
+          <button
+            onClick={() =>
+              window.open(
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                  horoscope
+                )} %23GensynHoroscope`,
+                "_blank"
+              )
+            }
             style={{
-              border: `1px solid ${color}`,
               background: "transparent",
-              color: color,
-              borderRadius: "8px",
-              padding: "0.8rem 1.6rem",
+              border: `2px solid ${color}`,
+              padding: "0.8rem 1.5rem",
+              borderRadius: "10px",
+              fontWeight: "bold",
+              color: "white",
               cursor: "pointer",
+              transition: "all 0.3s ease",
             }}
           >
-            <Twitter size={16} /> Share to X
-          </motion.button>
+            🐦 Share to X
+          </button>
         </div>
 
-        <footer style={{ fontSize: "0.85rem", opacity: 0.7 }}>
+        <p
+          style={{
+            marginTop: "2rem",
+            fontSize: "0.9rem",
+            color: "#aaa",
+          }}
+        >
           Created by <span style={{ color }}>{`@Ozigoyeng`}</span>
-        </footer>
-      </motion.div>
+        </p>
+      </div>
     </div>
   );
 }
+
+export default App;
