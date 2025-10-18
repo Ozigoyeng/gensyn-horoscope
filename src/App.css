@@ -1,55 +1,140 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-body {
+body, html, #root {
   margin: 0;
-  background-color: #0a0f1c;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
+  background: radial-gradient(circle at center, #250033, #0a0015 90%);
+  animation: backgroundPulse 10s infinite alternate;
+  font-family: 'Orbitron', sans-serif;
 }
 
-.glow-title {
-  font-size: 2.2rem;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  animation: glowPulse 3s infinite ease-in-out;
+@keyframes backgroundPulse {
+  0% { background-color: #0a0015; }
+  50% { background-color: #18002b; }
+  100% { background-color: #0a0015; }
 }
 
-.horoscope-card {
-  margin-top: 1.5rem;
-  border: 1px solid;
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
-  background: rgba(15, 23, 42, 0.8);
-  color: #e2e8f0;
-  font-size: 1.2rem;
-  max-width: 520px;
-  line-height: 1.6;
-  animation: floaty 4s ease-in-out infinite;
-  transition: all 0.3s ease;
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: #fff;
 }
 
-.horoscope-card:hover {
-  transform: scale(1.02);
+.card {
+  background: rgba(0, 0, 0, 0.65);
+  border: 2px solid rgba(255, 0, 255, 0.3);
+  border-radius: 25px;
+  padding: 2rem 3rem;
+  box-shadow: 0 0 50px rgba(255, 0, 255, 0.4);
+  width: 500px;
+  animation: float 6s ease-in-out infinite;
 }
 
-@keyframes glowPulse {
-  0%, 100% { text-shadow: 0 0 10px #f0abfc; }
-  50% { text-shadow: 0 0 25px #38bdf8; }
-}
-
-@keyframes floaty {
-  0%, 100% { transform: translateY(0px); }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
 
-@keyframes pulse-bg {
-  0% {
-    background-color: #0a0010;
-  }
-  50% {
-    background-color: #1a0020;
-  }
-  100% {
-    background-color: #0a0010;
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 25px #ff00ff;
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  0% { box-shadow: 0 0 15px #ff00ff; }
+  100% { box-shadow: 0 0 35px #ff77ff; }
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.horoscope {
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  color: #ffb3ff;
+  font-style: italic;
+}
+
+.power {
+  margin-top: 0.8rem;
+  color: #ffff99;
+}
+
+.buttons {
+  margin-top: 2rem;
+}
+
+button {
+  margin: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff00ff, #cc00cc);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff00ff;
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.creator-link {
+  color: #ff00ff;
+  font-weight: 700;
+  text-decoration: none;
+  text-shadow: 0 0 10px #ff00ff, 0 0 25px #ff33ff;
+  transition: all 0.3s ease;
+}
+
+.creator-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 15px #ff66ff, 0 0 35px #ff00ff;
+}
+
+/* ✨ Smooth fade animations */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.2s forwards;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1.5s forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
