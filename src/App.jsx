@@ -54,16 +54,15 @@ export default function App() {
 
   return (
     <div
-      className="w-screen h-screen flex items-center justify-center overflow-hidden"
+      className="flex items-center justify-center w-full h-full"
       style={{
         background: `radial-gradient(circle at center, ${color}22, #000)`,
         color: "#fff",
-        fontFamily: "'Orbitron', sans-serif",
       }}
     >
-      {/* Stars */}
+      {/* Background stars */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {[...Array(80)].map((_, i) => (
+        {[...Array(70)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
@@ -77,7 +76,7 @@ export default function App() {
               opacity: [Math.random(), Math.random()],
             }}
             transition={{
-              duration: 6 + Math.random() * 8,
+              duration: 8 + Math.random() * 6,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -85,19 +84,18 @@ export default function App() {
         ))}
       </div>
 
-      {/* Main content */}
+      {/* Main card */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center rounded-2xl shadow-2xl"
+        className="relative z-10 flex flex-col items-center justify-center text-center p-10 rounded-2xl shadow-2xl"
         style={{
           background: "rgba(0, 0, 0, 0.45)",
           border: `1px solid ${color}55`,
-          boxShadow: `0 0 40px ${color}88`,
-          backdropFilter: "blur(8px)",
-          padding: "3rem 2rem",
-          width: "90%",
+          boxShadow: `0 0 50px ${color}99`,
+          backdropFilter: "blur(10px)",
           maxWidth: "700px",
+          width: "90%",
         }}
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
       >
@@ -109,11 +107,11 @@ export default function App() {
         </h1>
 
         <p
-          className="text-xl sm:text-2xl leading-relaxed mb-8"
+          className="text-xl sm:text-2xl mb-8 leading-relaxed"
           style={{
-            color: "#e0e0e0",
-            textShadow: `0 0 12px ${color}55`,
             minHeight: "80px",
+            color: "#ddd",
+            textShadow: `0 0 10px ${color}55`,
           }}
         >
           {displayText}
@@ -124,7 +122,7 @@ export default function App() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={getRandomHoroscope}
-            className="px-6 py-3 text-lg font-bold rounded-xl flex items-center gap-2"
+            className="px-6 py-3 font-bold rounded-lg flex items-center gap-2"
             style={{
               background: color,
               color: "#000",
@@ -138,7 +136,7 @@ export default function App() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleShare}
-            className="px-5 py-3 border border-white/60 text-sm rounded-lg flex items-center gap-2 text-white"
+            className="px-5 py-3 border border-white/70 text-sm rounded-lg flex items-center gap-2 text-white"
           >
             <Twitter size={16} /> Share to X
           </motion.button>
