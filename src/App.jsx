@@ -44,28 +44,19 @@ const CONSOLE_SCRIPT = [
 
 export default function App() {
   const [tab, setTab] = useState(TABS[0]);
-
-  // Music state
-  const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
+  const [dance, setDance] = useState(false);
+  const audioRef = useRef(null);
 
-  // Horoscope state + typewriter
-  const [power, setPower] = useState(null);
   const [typed, setTyped] = useState("");
+  const [power, setPower] = useState(null);
   const [fullMsg, setFullMsg] = useState("");
 
-  // Fortune & pickup
   const [fortune, setFortune] = useState("");
   const [line, setLine] = useState("");
-
-  // Console
   const [consoleLines, setConsoleLines] = useState([]);
   const [consoleRun, setConsoleRun] = useState(false);
 
-  // Dance mode (logo jiggle)
-  const [dance, setDance] = useState(false);
-
-  // === Helpers ===
   const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
   const revealHoroscope = () => {
@@ -74,13 +65,12 @@ export default function App() {
     setTyped("");
     setPower((90 + Math.random() * 10).toFixed(2));
 
-    // typewriter
     let i = 0;
     const id = setInterval(() => {
       setTyped((prev) => prev + msg[i]);
       i += 1;
       if (i >= msg.length) clearInterval(id);
-    }, 28);
+    }, 30);
   };
 
   const crackFortune = () => setFortune(rand(FORTUNES));
@@ -88,25 +78,21 @@ export default function App() {
 
   const toggleMusic = () => {
     if (!audioRef.current) return;
+    const a = audioRef.current;
     if (playing) {
-      audioRef.current.pause();
+      a.pause();
       setPlaying(false);
     } else {
-      // gentle fade-in
-      const a = audioRef.current;
       a.volume = 0;
-      a
-        .play()
-        .then(() => {
-          setPlaying(true);
-          let v = 0;
-          const fade = setInterval(() => {
-            v += 0.05;
-            a.volume = Math.min(0.8, v);
-            if (v >= 0.8) clearInterval(fade);
-          }, 120);
-        })
-        .catch(() => {});
+      a.play().then(() => {
+        setPlaying(true);
+        let v = 0;
+        const fade = setInterval(() => {
+          v += 0.05;
+          a.volume = Math.min(0.8, v);
+          if (v >= 0.8) clearInterval(fade);
+        }, 100);
+      });
     }
   };
 
@@ -121,7 +107,6 @@ export default function App() {
     setConsoleRun(false);
   };
 
-  // Default horoscope on first load
   useEffect(() => {
     revealHoroscope();
   }, []);
@@ -130,14 +115,10 @@ export default function App() {
     <div className="app">
       <audio ref={audioRef} src="/gensyn-theme.mp3" loop preload="auto" />
       <div className="card">
-        <img
-          src={logo}
-          alt="Gensyn logo"
-          className={`logo ${dance || playing ? "dance" : ""}`}
-        />
+        <img src={logo} alt="Gensyn logo" className={`logo ${dance ? "dance" : ""}`} />
         <h1>🔮 Gensyn Horoscope</h1>
+        <p className="tagline">🧩 Synchronize with peers — merge with harmony.</p>
 
-        {/* Tabs */}
         <div className="tabs">
           {TABS.map((t) => (
             <button
@@ -150,34 +131,22 @@ export default function App() {
           ))}
         </div>
 
-        {/* Tab content */}
         {tab === "Horoscope" && (
           <div className="section">
-            <p className="subtitle">
-              🧩 Synchronize with peers before branching — merge with harmony.
-            </p>
-
             <p className="typed">{typed}</p>
             {power && (
               <p className="power">
                 ⚙ Compute Power Index: <b>{power} TFLOPS</b>
               </p>
             )}
-
             <div className="buttons">
               <button className="cta" onClick={revealHoroscope}>
                 ✨ Reveal Horoscope
               </button>
-              <button
-                className={`music ${playing ? "playing" : ""}`}
-                onClick={toggleMusic}
-              >
-                {playing ? "⏸ Stop Music" : "🎵 Play Music"}
+              <button className="music" onClick={toggleMusic}>
+                {playing ? "⏸ Pause Music" : "🎵 Play Music"}
               </button>
-              <button
-                className={`ghost ${dance ? "on" : ""}`}
-                onClick={() => setDance((d) => !d)}
-              >
+              <button className="ghost" onClick={() => setDance((d) => !d)}>
                 🪩 {dance ? "Stop Dance" : "Dance Mode"}
               </button>
             </div>
@@ -187,43 +156,32 @@ export default function App() {
         {tab === "Fortune" && (
           <div className="section">
             <p className="subtitle">🍪 AI Fortune Cookie</p>
-            <p className="fortune">{fortune || "Crack the cookie!"}</p>
-            <div className="buttons">
-              <button className="cta" onClick={crackFortune}>
-                🍪 Crack Your Fortune
-              </button>
-            </div>
+            <p className="fortune">{fortune || "Crack your cookie for wisdom!"}</p>
+            <button className="cta" onClick={crackFortune}>
+              🍪 Crack It!
+            </button>
           </div>
         )}
 
         {tab === "Pick-up Lines" && (
           <div className="section">
             <p className="subtitle">💘 Neural Pick-up Lines</p>
-            <p className="line">{line || "Generate a spicy AI line!"}</p>
-            <div className="buttons">
-              <button className="cta" onClick={pickupLine}>
-                💬 Generate Line
-              </button>
-            </div>
+            <p className="line">{line || "Generate a cheeky AI line!"}</p>
+            <button className="cta" onClick={pickupLine}>
+              💬 Generate Line
+            </button>
           </div>
         )}
 
         {tab === "AI Console" && (
-          <div className="section">
-            <p className="subtitle">💻 Quantum Diagnostic Console</p>
-            <div className="console">
-              {consoleLines.map((l, i) => (
-                <div key={i}>{l}</div>
-              ))}
-              {!consoleLines.length && (
-                <div className="dim">> Stand by for initialization…</div>
-              )}
-            </div>
-            <div className="buttons">
-              <button className="cta" onClick={runConsole} disabled={consoleRun}>
-                ⚡ {consoleRun ? "Running…" : "Run Diagnostic"}
-              </button>
-            </div>
+          <div className="section console">
+            {consoleLines.map((l, i) => (
+              <div key={i}>{l}</div>
+            ))}
+            {!consoleLines.length && <div className="dim">> Stand by for initialization…</div>}
+            <button className="cta" onClick={runConsole} disabled={consoleRun}>
+              ⚡ {consoleRun ? "Running…" : "Run Diagnostic"}
+            </button>
           </div>
         )}
 
@@ -232,11 +190,11 @@ export default function App() {
             Created by{" "}
             <a
               className="credit"
-              href="https://x.com/Ozigoyeng"
+              href="https://x.com/Ojigoyeng"
               target="_blank"
               rel="noreferrer"
             >
-              @Ozigoyeng
+              @Ojigoyeng
             </a>
           </p>
         </footer>
