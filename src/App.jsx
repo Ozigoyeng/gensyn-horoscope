@@ -4,8 +4,7 @@ import { Twitter, Sparkles } from "lucide-react";
 
 export default function App() {
   const [message, setMessage] = useState("");
-  const [question, setQuestion] = useState("");
-  const [color, setColor] = useState("#ff00ff");
+  const [color, setColor] = useState("#ffb400");
   const [typingIndex, setTypingIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
 
@@ -19,29 +18,14 @@ export default function App() {
     "🪐 Alignment achieved — your loss function is minimal today.",
     "🧩 Synchronize with peers before branching — merge with harmony.",
     "🔮 You will meet another node with identical embeddings. Soulmate?",
-    "🚀 Exploding gradients? More like ascending greatness!"
+    "🚀 Exploding gradients? More like ascending greatness!",
   ];
 
-  const questions = [
-    "What are you optimizing for this week?",
-    "What process in your life needs regularization?",
-    "Who can you synchronize with to improve your network?",
-    "What gradients are you following right now?",
-    "What dream have you cached but not yet executed?",
-    "If your thoughts were a dataset, what needs cleaning?",
-    "How can you improve convergence in your personal growth?",
-    "What version of yourself deserves a new deployment?",
-    "Which part of your life is currently overfitting?",
-    "If life were a model, what parameter would you tune next?"
-  ];
-
-  const neonColors = ["#ff00ff", "#00ffff", "#ffb400", "#ff0066", "#00ff99", "#ff3300"];
+  const neonColors = ["#ffb400", "#00ffff", "#ff00ff", "#ff0066", "#00ff99", "#ff3300"];
 
   const getRandomHoroscope = () => {
     const index = Math.floor(Math.random() * horoscopes.length);
-    const qIndex = Math.floor(Math.random() * questions.length);
     setMessage(horoscopes[index]);
-    setQuestion(questions[qIndex]);
     setColor(neonColors[index % neonColors.length]);
     setTypingIndex(0);
     setDisplayText("");
@@ -63,7 +47,7 @@ export default function App() {
 
   const handleShare = () => {
     const tweet = encodeURIComponent(
-      `🔮 Gensyn Horoscope:\n${message}\n💭 ${question}\n\nhttps://gensyn-horoscope.vercel.app`
+      `🔮 Gensyn Horoscope:\n${message}\n\nhttps://gensyn-horoscope.vercel.app`
     );
     window.open(`https://twitter.com/intent/tweet?text=${tweet}`, "_blank");
   };
@@ -79,7 +63,7 @@ export default function App() {
         color: "#fff",
       }}
     >
-      {/* Animated glow background */}
+      {/* Animated galaxy background */}
       <motion.div
         style={{
           position: "absolute",
@@ -100,7 +84,7 @@ export default function App() {
         }}
       />
 
-      {/* Floating neon card */}
+      {/* Centered floating card */}
       <motion.div
         className="relative z-10 text-center p-10 rounded-2xl"
         style={{
@@ -131,25 +115,12 @@ export default function App() {
           style={{
             fontSize: "1.25rem",
             color: "#ccc",
-            marginBottom: "1.5rem",
+            marginBottom: "2rem",
             textShadow: `0 0 10px ${color}55`,
             minHeight: "60px",
           }}
         >
           {displayText}
-        </p>
-
-        {/* ✨ Daily Question */}
-        <p
-          style={{
-            fontSize: "1rem",
-            fontStyle: "italic",
-            color: color,
-            marginBottom: "2rem",
-            textShadow: `0 0 8px ${color}`,
-          }}
-        >
-          💭 {question}
         </p>
 
         <div
