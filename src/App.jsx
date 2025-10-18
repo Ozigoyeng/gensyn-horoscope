@@ -31,7 +31,6 @@ export default function App() {
     setDisplayText("");
   };
 
-  // Typing animation
   useEffect(() => {
     if (typingIndex < message.length) {
       const timeout = setTimeout(() => {
@@ -55,9 +54,9 @@ export default function App() {
 
   return (
     <div
-      className="relative w-screen h-screen overflow-hidden"
+      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center"
       style={{
-        background: `radial-gradient(circle at center, ${color}11, #000)`,
+        background: `radial-gradient(circle at center, ${color}22, #000)`,
         color: "#fff",
         fontFamily: "'Orbitron', sans-serif",
       }}
@@ -86,20 +85,17 @@ export default function App() {
         ))}
       </div>
 
-      {/* CENTERED CONTENT */}
+      {/* Centered content */}
       <motion.div
-        className="absolute z-10 flex flex-col items-center justify-center text-center rounded-2xl"
+        className="relative z-10 flex flex-col items-center text-center rounded-2xl"
         style={{
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          background: "rgba(0,0,0,0.4)",
+          background: "rgba(0, 0, 0, 0.4)",
           border: `1px solid ${color}55`,
-          boxShadow: `0 0 30px ${color}77`,
+          boxShadow: `0 0 40px ${color}88`,
           backdropFilter: "blur(8px)",
+          padding: "3rem 2rem",
           width: "90%",
           maxWidth: "700px",
-          padding: "3rem 2rem",
         }}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -107,9 +103,7 @@ export default function App() {
       >
         <h1
           className="text-5xl sm:text-6xl font-bold mb-6"
-          style={{
-            textShadow: `0 0 25px ${color}`,
-          }}
+          style={{ textShadow: `0 0 25px ${color}` }}
         >
           🔮 Gensyn Horoscope
         </h1>
@@ -118,7 +112,7 @@ export default function App() {
           className="text-xl sm:text-2xl leading-relaxed mb-8"
           style={{
             color: "#e0e0e0",
-            textShadow: `0 0 10px ${color}66`,
+            textShadow: `0 0 12px ${color}55`,
             minHeight: "80px",
           }}
         >
