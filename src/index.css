@@ -1,32 +1,119 @@
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(circle at center, #000, #0a0a0a);
-  font-family: 'Orbitron', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap");
+
+:root{
+  --bg:#000;
+  --card:#0a0a0aee;
+  --mag:#ff00ff;
+  --mag2:#b300ff;
+  --text:#eae9ef;
+  --sub:#c9c7d3;
+  --accent:#ffd74a;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+*{box-sizing:border-box}
+html,body,#root{
+  height:100%;
+}
+body{
+  margin:0;
+  color:var(--text);
+  font-family:"Orbitron",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+  background: radial-gradient(circle at 30% 20%, #120014 0%, #000 50%);
+  overflow:hidden;
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.app{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
 }
 
-* {
-  box-sizing: border-box;
+.card{
+  width:min(540px,92vw);
+  background:var(--card);
+  border:2px solid rgba(255,0,255,.2);
+  border-radius:22px;
+  padding:28px 26px 18px;
+  text-align:center;
+  box-shadow:0 0 60px rgba(255,0,255,.35);
+  backdrop-filter: blur(3px);
+  animation: float 6s ease-in-out infinite;
 }
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.logo{
+  width:88px;height:88px;border-radius:14px;margin:4px auto 10px;
+  filter: drop-shadow(0 0 16px var(--mag));
+  transition: transform .2s ease;
+}
+.logo.dance{animation: dance 1.1s infinite ease-in-out}
+@keyframes dance{
+  0%{transform:rotate(0deg)}
+  25%{transform:rotate(8deg)}
+  50%{transform:rotate(-8deg)}
+  75%{transform:rotate(8deg)}
+  100%{transform:rotate(0deg)}
+}
+
+h1{margin:.4rem 0 8px;font-size:1.9rem;color:#f4c9ff;text-shadow:0 0 14px var(--mag)}
+
+.subtitle{margin:4px auto 14px;font-size:.95rem;color:var(--sub)}
+.typed{min-height:48px;margin:10px auto 6px;color:#ffb6ff;font-size:1.05rem}
+.power{margin:2px auto 10px;color:var(--accent)}
+
+.tabs{
+  display:flex;gap:8px;justify-content:center;margin:6px auto 16px;flex-wrap:wrap
+}
+.tab{
+  background:#160018;border:1px solid #3a003d;color:#f6e7ff;
+  padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;
+  box-shadow:0 0 10px #2b0030;transition:.2s;
+}
+.tab:hover{transform:translateY(-1px)}
+.tab.active{background:linear-gradient(135deg,#ff41ff,#b300ff);color:#fff;border-color:transparent;box-shadow:0 0 18px var(--mag)}
+
+.section{min-height:160px}
+
+.buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+button{
+  border:none;border-radius:12px;padding:10px 16px;cursor:pointer;
+  font-weight:800;letter-spacing:.5px;
+  font-family:inherit;transition:.2s;color:#0b0010;
+}
+button.cta{
+  background:linear-gradient(135deg,#ff00ff,#b300ff);
+  box-shadow:0 0 18px rgba(255,0,255,.6);
+}
+button.cta:hover{transform:scale(1.05)}
+button.music{
+  background:#8f3bff;color:#fff;box-shadow:0 0 14px #8f3bff;
+}
+button.music.playing{
+  animation:pulse 2.2s infinite
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 14px #8f3bff,0 0 28px #ff5cff}
+  50%{box-shadow:0 0 24px #ff5cff,0 0 48px #ffc0ff}
+}
+button.ghost{
+  background:transparent;color:#f4c9ff;border:1px solid #6a2b87;box-shadow:0 0 8px #3a0044 inset
+}
+button.ghost.on{border-color:#ff9cff;color:#fff;box-shadow:0 0 14px #ff9cff inset}
+
+.fortune,.line{min-height:48px;margin:10px auto;color:#ffdfff}
+.console{
+  text-align:left;background:#09000f;border:1px solid #3a003e;border-radius:12px;
+  padding:12px;min-height:120px;max-height:160px;overflow:auto;
+  box-shadow: inset 0 0 18px rgba(255,0,255,.15);
+  font-size:.9rem
+}
+.console .dim{opacity:.6}
+
+footer{margin-top:18px;font-size:.9rem;opacity:.95}
+.credit{
+  color:var(--mag);text-decoration:none;font-weight:800;
+  text-shadow:0 0 10px var(--mag),0 0 22px #ff63ff;transition:.2s
+}
+.credit:hover{color:#fff;text-shadow:0 0 14px #ff63ff,0 0 30px var(--mag)}
