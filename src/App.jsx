@@ -6,7 +6,7 @@ export default function App() {
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("#ff00ff");
 
-  // ✅ Dibungkus useMemo supaya tidak dianggap berubah tiap render
+  // Horoscope & colors — static via useMemo
   const horoscopes = useMemo(
     () => [
       "💻 Your compute power is unmatched today. Deploy with confidence!",
@@ -24,18 +24,10 @@ export default function App() {
   );
 
   const neonColors = useMemo(
-    () => [
-      "#ff00ff",
-      "#00ffff",
-      "#ff9900",
-      "#ff0066",
-      "#00ff99",
-      "#ff3300",
-    ],
+    () => ["#ff00ff", "#00ffff", "#ff9900", "#ff0066", "#00ff99", "#ff3300"],
     []
   );
 
-  // ✅ Sekarang hook ini tidak akan memunculkan warning sama sekali
   const getDailyHoroscope = useCallback(() => {
     const today = new Date().toDateString();
     const hash = [...today].reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
@@ -44,6 +36,7 @@ export default function App() {
     setColor(neonColors[index % neonColors.length]);
   }, [horoscopes, neonColors]);
 
+  // Initial render
   useEffect(() => {
     getDailyHoroscope();
   }, [getDailyHoroscope]);
@@ -63,10 +56,13 @@ export default function App() {
         color: "#fff",
         fontFamily: "'Orbitron', sans-serif",
         transition: "background 1s ease",
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
       }}
     >
       <motion.h1
-        className="text-4xl font-bold mb-6"
+        className="text-4xl sm:text-5xl font-bold mb-8"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -75,7 +71,7 @@ export default function App() {
       </motion.h1>
 
       <motion.div
-        className="text-xl max-w-md leading-relaxed"
+        className="text-xl sm:text-2xl max-w-lg leading-relaxed px-4"
         key={message}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -88,7 +84,7 @@ export default function App() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={getDailyHoroscope}
-        className="mt-6 px-6 py-3 text-lg bg-pink-500 hover:bg-pink-600 text-white rounded-xl shadow-lg flex items-center gap-2"
+        className="mt-8 px-6 py-3 text-lg bg-pink-500 hover:bg-pink-600 text-white rounded-xl shadow-lg flex items-center gap-2"
       >
         <Sparkles size={18} />
         Reveal My Node Horoscope
@@ -103,9 +99,8 @@ export default function App() {
         <Twitter size={16} /> Share to X
       </motion.button>
 
-      <footer className="mt-8 text-sm opacity-70">
-        Created by{" "}
-        <span style={{ color: color }}>@Ozigoyeng</span> · Gensyn Pioneer Candidate
+      <footer className="mt-10 text-sm opacity-70">
+        Created by <span style={{ color: color }}>@Ozigoyeng</span>
       </footer>
     </div>
   );
